@@ -1,6 +1,6 @@
 # clj-polling
 
-A Clojure library for polling resource.
+A Clojure library for polling resources.
 
 ## Usage
 
