@@ -2,12 +2,15 @@
 
 A Clojure library for polling resources.
 
-## Usage
+## Example
 
-TODO
+You should see "Hello" printed twice in this example.
 
-## License
+```clj
+(defn say-hello [] (println "Hello"))
 
-Copyright © 2013 Paul Lam
+(periodically say-hello 0 200)
 
-Distributed under the Eclipse Public License, the same as Clojure.
+(Thread/sleep 500)  ;; wait 500 ms
+(shutdown)          ;; shutdown
+```
