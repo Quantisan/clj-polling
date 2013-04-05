@@ -5,18 +5,16 @@
   "
   (:import (java.util.concurrent ScheduledThreadPoolExecutor TimeUnit)))
 
-(def ^:private num-threads 1)
-
 (def ^:private pool (atom nil))
 
-(defn- thread-pool []
-  (swap! pool (fn [p] (or p (ScheduledThreadPoolExecutor. num-threads)))))
+(defn- thread-pool [threads]
+  (swap! pool (fn [p] (or p (ScheduledThreadPoolExecutor. threads)))))
 
 (defn periodically
   "Schedules function f to run every 'delay' milliseconds after a
   delay of 'initial-delay'."
-  [f initial-delay delay]
-  (.scheduleWithFixedDelay (thread-pool)
+  [f initial-delay delay & {:keys [threads] :or {threads 1}}]
+  (.scheduleWithFixedDelay (thread-pool threads)
                            f
                            initial-delay delay TimeUnit/MILLISECONDS))
 
